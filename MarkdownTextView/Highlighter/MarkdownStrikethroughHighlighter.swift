@@ -32,14 +32,14 @@ public final class MarkdownStrikethroughHighlighter: HighlighterType {
     public func highlightAttributedString(_ attributedString: NSMutableAttributedString) {
         enumerateMatches(type(of: self).StrikethroughRegex, string: attributedString.string) {
             var strikethroughAttributes: TextAttributes = [
-                NSStrikethroughStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue as AnyObject
+                NSAttributedStringKey.strikethroughStyle: NSUnderlineStyle.styleSingle.rawValue as AnyObject
             ]
             if let attributes = self.attributes {
                 for (key, value) in attributes {
                     strikethroughAttributes[key] = value
                 }
             }
-            attributedString.addAttributes(strikethroughAttributes, range: $0.rangeAt(2))
+            attributedString.addAttributes(strikethroughAttributes, range: $0.range(at: 2))
         }
     }
 }

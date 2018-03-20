@@ -77,14 +77,15 @@ open class MarkdownTextView: UITextView, UITextViewDelegate {
   
   open func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
     if isReturn(text) {
-      var objectLine = textView.text.substring(to: textView.text.index(textView.text.startIndex, offsetBy: range.location))
+      let index = textView.text.index(textView.text.startIndex, offsetBy: range.location)
+      var objectLine = String(textView.text[..<index])
       
       let textSplits = objectLine.components(separatedBy: "\n")
       if textSplits.count > 0 {
         objectLine = textSplits[textSplits.count - 1]
       }
       
-      let objectLineRange = NSRange(location: 0, length: objectLine.characters.count)
+      let objectLineRange = NSRange(location: 0, length: objectLine.count)
       
       // Check matches.
       let listMatches = markdownListRegularExpression.matches(in: objectLine, options: [], range: objectLineRange)

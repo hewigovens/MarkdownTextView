@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func printAction() {
+    @objc func printAction() {
         let text = textView.text ?? ""
         print("text: \n\(text)")
         
